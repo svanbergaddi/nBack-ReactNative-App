@@ -38,11 +38,12 @@ src/
     scoreDb.ts          # saveScore, listScores(sortBy, direction), getHighScore (expo-sqlite)
   viewmodels/
     useGame.ts          # round timer, speech, engine calls
-    useSettings.ts
-    useScores.ts
+    useSettings.tsx     # SettingsProvider (React Context, wraps the app in _layout) + useSettings
+    useScores.ts        # high score (refreshed on focus), score list
   components/
     Grid.tsx
     MatchButton.tsx     # includes wrong-press animation
+    theme.ts            # COLORS (dark background, purple, gold) and OUTLINE width
 __tests__/
   sequence.test.ts      # generation, match rate, first-n guarantee
   engine.test.ts        # press guards, double-press, scoring
@@ -70,10 +71,13 @@ Do not add files outside this layout without asking.
 - Game state is treated as immutable: transitions return new objects.
 
 ## Documentation
+- Every file in `src/` starts with one line naming its layer and job, e.g. `// VIEWMODEL · Game: round state, event timer, speech, commands.`
+- `src/README.md` is the map of `src/`: one line per file. Update it whenever a file is added, removed or changes job.
 - Every exported function, hook, type and component has a TSDoc comment: what it does, and any invariant (e.g. "the first n entries are never matches").
 - Comment the *why*, not the *what*, inside function bodies.
 
 ## Styling / UI
 - `StyleSheet.create`, no UI library.
+- Colours only from `COLORS` in `src/components/theme.ts`; no hex codes in screens or components. Dark theme, no white or light backgrounds: near-black purple background, purple cells and buttons with gold outlines (`OUTLINE`), light text. Primary actions are gold with dark text; the lit grid cell is gold.
 - Grid size from `useWindowDimensions`: `side = min(width, availableHeight) - padding`, so it stays square in both orientations.
-- Wrong-press feedback: a short color pulse + slight shake on the button using `Animated`. Neutral colors (soft orange/grey), no red "X", no sounds, no text like "Wrong!".
+- Wrong-press feedback: a short color pulse + slight shake on the button using `Animated`. Neutral colour (`COLORS.feedback`, a soft grey), no red "X", no sounds, no text like "Wrong!".

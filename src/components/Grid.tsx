@@ -1,5 +1,9 @@
+// VIEW · Square n×n grid with one lit cell.
+
 import { useEffect, useState } from 'react';
 import { Animated, StyleSheet, useWindowDimensions, View } from 'react-native';
+
+import { COLORS, OUTLINE } from './theme';
 
 const GAP = 6;
 
@@ -32,6 +36,6 @@ export function Grid({ gridSize, litCell, eventIndex }: { gridSize: number; litC
 
 const styles = StyleSheet.create({
   grid: { flexDirection: 'row', flexWrap: 'wrap' },
-  cell: { borderRadius: 8, backgroundColor: '#e5e7eb', overflow: 'hidden' },
-  lit: { flex: 1, backgroundColor: '#3b82f6' },
+  cell: { borderRadius: 8, borderWidth: OUTLINE, borderColor: COLORS.gold, backgroundColor: COLORS.purple, overflow: 'hidden' },
+  lit: { flex: 1, backgroundColor: COLORS.gold },
 });

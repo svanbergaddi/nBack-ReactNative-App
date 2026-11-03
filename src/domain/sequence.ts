@@ -1,3 +1,5 @@
+// MODEL (domain) · Stimulus sequence generator, match check, seeded random.
+
 import { Rng } from './types';
 
 /**
