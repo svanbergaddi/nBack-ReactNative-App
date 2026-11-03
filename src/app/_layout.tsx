@@ -1,5 +1,6 @@
-import { Stack } from "expo-router";
+import { Stack } from 'expo-router';
 
+/** Root navigator: a stack of screens with a header and back button. */
 export default function RootLayout() {
-  return <Stack />;
+  return <Stack screenOptions={{ title: 'N-Back' }} />;
 }

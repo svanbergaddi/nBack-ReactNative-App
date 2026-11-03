@@ -23,10 +23,15 @@ export function isMatch(sequence: number[], index: number, n: number): boolean {
   return index >= n && sequence[index] === sequence[index - n];
 }
 
+/** Number of matches placed in a sequence: matchRate of the events after the first n. */
+export function countMatchesToPlace(length: number, n: number, matchRate: number): number {
+  return Math.round(matchRate * (length - n));
+}
+
 /**
  * Generates one stimulus sequence of values in [0, alphabetSize).
  * Invariants: the first n entries are never matches, and exactly
- * round(matchRate × (length − n)) of the remaining entries are matches.
+ * countMatchesToPlace(length, n, matchRate) of the remaining entries are matches.
  */
 export function generateSequence(options: {
   length: number;
@@ -36,7 +41,7 @@ export function generateSequence(options: {
   rng: Rng;
 }): number[] {
   const { length, n, alphabetSize, matchRate, rng } = options;
-  const matchCount = Math.round(matchRate * (length - n));
+  const matchCount = countMatchesToPlace(length, n, matchRate);
 
   // Pick which indices (n .. length-1) become matches: shuffle the first matchCount slots into place.
   const candidates = Array.from({ length: length - n }, (_, k) => k + n);

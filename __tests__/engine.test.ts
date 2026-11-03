@@ -1,6 +1,7 @@
 import { describe, expect, it } from '@jest/globals';
 import {
   advanceEvent,
+  computeMaxScore,
   computeScore,
   createIdleState,
   registerPress,
@@ -112,5 +113,19 @@ describe('counting and scoring', () => {
     });
     expect(computeScore(withStats(3, 1))).toBe(5); // (3 − 1) + 3
     expect(computeScore(withStats(0, 4))).toBe(0); // −4 floored at 0
+  });
+
+  // Fails if: computeMaxScore and generateSequence disagree on how many matches a round has.
+  it('gives exactly the max score for a perfect round', () => {
+    let state = newRound();
+    while (state.phase === 'running') {
+      for (const modality of ['position', 'audio'] as const) {
+        const sequence = modality === 'position' ? state.positionSequence : state.letterSequence;
+        if (isMatch(sequence, state.currentEventIndex, settings.n)) state = registerPress(state, modality);
+      }
+      state = advanceEvent(state);
+    }
+    expect(computeMaxScore(settings)).toBe(10); // round(0.3 × 18) = 5 matches × 2 modalities
+    expect(computeScore(state)).toBe(computeMaxScore(settings));
   });
 });

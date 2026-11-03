@@ -53,6 +53,7 @@ HUD shows: current event number (1-based) / total, and correct responses (hits) 
 ## Score
 `score = max(0, totalHits - totalFalseAlarms)`, summed over the active modalities.
 - Rewards correct detections, penalises guessing, and the floor at 0 prevents negative scores.
+- `maxScore = round(matchRate × (eventsPerRound − n)) × activeModalityCount`: every match hit, no false alarms. It is fixed per settings (sequences have an exact match count), so results are shown as `score / maxScore`.
 - High score on Home = the highest score in the score database (0 if empty).
 
 ## Settings (persistent, AsyncStorage)
