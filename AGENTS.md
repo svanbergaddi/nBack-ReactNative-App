@@ -1,10 +1,10 @@
-# N-Back lab (HI1033 / CM2023, Lab B:1)
+# N-Back app
 
 Dual n-back game in Expo + TypeScript. Before writing any code, read:
 
 - `SPEC.md`: what to build (requirements, rules, screens, data)
 - `STYLE.md`: architecture, folder layout, brevity rules. **Wins on any architecture question.**
-- `CONTEXT.md`: course constraints, allowed dependencies, how to work with me
+- `CONTEXT.md`: constraints, allowed dependencies, working agreement
 
 Done means: `npx jest`, `npx expo lint` and `npx tsc --noEmit` all pass.
 

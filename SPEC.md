@@ -1,12 +1,12 @@
-# SPEC — N-Back mobile app (Lab B:1, HI1033 / CM2023)
+# SPEC — N-Back mobile app
 
 ## Platform
 - React Native with Expo, TypeScript (strict mode).
 - Navigation: Expo Router (file-based, from the default Expo template).
 - Primary test device: iPhone via Expo Go. Layout also checked on an Android emulator and an iPad/tablet simulator.
 
-## Target grade
-Full marks (2 points): **dual n-back** plus these higher-level features:
+## Scope
+**Dual n-back** plus these features:
 1. Persistent settings screen
 2. Score history backed by a local SQLite database
 3. Accessibility (touch-target size, TTS fallback message)
@@ -90,7 +90,7 @@ Table `scores`:
 - Respect safe areas (`react-native-safe-area-context`).
 
 ## Unit tests (Jest via jest-expo)
-All five listed in the brief:
+Required coverage:
 1. Sequence generation: correct length, values within the alphabet.
 2. Match-rate enforcement: exact match count; never extra matches.
 3. First-n guarantee: no match is counted, and presses are ignored for i < n.
