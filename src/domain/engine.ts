@@ -1,4 +1,4 @@
-import { generateSequence, isMatch } from './sequence';
+import { countMatchesToPlace, generateSequence, isMatch } from './sequence';
 import { GameMode, GameState, MATCH_RATE, Modality, Rng, Settings } from './types';
 
 const NO_PRESSES: Record<Modality, boolean> = { position: false, audio: false };
@@ -93,4 +93,13 @@ export function computeScore(state: GameState): number {
     0,
   );
   return Math.max(0, total);
+}
+
+/**
+ * Best possible score for these settings: every match hit, no false alarms.
+ * Fixed per settings because each sequence has an exact number of matches.
+ */
+export function computeMaxScore(settings: Settings): number {
+  const matchesPerModality = countMatchesToPlace(settings.eventsPerRound, settings.n, MATCH_RATE);
+  return matchesPerModality * activeModalities(settings.mode).length;
 }
