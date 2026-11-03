@@ -1,3 +1,15 @@
+# N-Back app
+
+Dual n-back game in Expo + TypeScript. Before writing any code, read:
+
+- `SPEC.md`: what to build (requirements, rules, screens, data)
+- `STYLE.md`: architecture, folder layout, brevity rules. **Wins on any architecture question.**
+- `CONTEXT.md`: constraints, allowed dependencies, working agreement
+
+Done means: `npx jest`, `npx expo lint` and `npx tsc --noEmit` all pass.
+
+---
+
 This is an Expo/React Native mobile application. Prioritize mobile-first patterns, performance, and cross-platform compatibility.
 
 ## Expo has changed — do not trust your training data
