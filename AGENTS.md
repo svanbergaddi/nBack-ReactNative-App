@@ -5,8 +5,11 @@ Dual n-back game in Expo + TypeScript. Before writing any code, read:
 - `SPEC.md`: what to build (requirements, rules, screens, data)
 - `STYLE.md`: architecture, folder layout, brevity rules. **Wins on any architecture question.**
 - `CONTEXT.md`: constraints, allowed dependencies, working agreement
+- `src/README.md`: map of the source code, one line per file
 
 Done means: `npx jest`, `npx expo lint` and `npx tsc --noEmit` all pass.
+
+`docs/llm-log.md` is written by me. Don't edit it; offer a draft in chat instead if one would help.
 
 ---
 

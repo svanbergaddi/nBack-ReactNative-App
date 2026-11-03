@@ -1,3 +1,5 @@
+// MODEL (domain) · Game rules: start round, press, tick, score. Pure functions.
+
 import { countMatchesToPlace, generateSequence, isMatch } from './sequence';
 import { GameMode, GameState, MATCH_RATE, Modality, Rng, Settings } from './types';
 

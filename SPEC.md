@@ -54,17 +54,19 @@ HUD shows: current event number (1-based) / total, and correct responses (hits) 
 `score = max(0, totalHits - totalFalseAlarms)`, summed over the active modalities.
 - Rewards correct detections, penalises guessing, and the floor at 0 prevents negative scores.
 - `maxScore = round(matchRate × (eventsPerRound − n)) × activeModalityCount`: every match hit, no false alarms. It is fixed per settings (sequences have an exact match count), so results are shown as `score / maxScore`.
-- High score on Home = the highest score in the score database (0 if empty).
+- High score on Home = the highest score in the score database, shown with the name it was saved under ("High score: 8 · Sam"). On a tie the earliest save wins. "No high score yet" when the database is empty.
 
 ## Settings (persistent, AsyncStorage)
-| Setting          | Default | Range            |
-|------------------|---------|------------------|
-| mode             | dual    | visual/audio/dual|
-| n                | 2       | 1–5              |
-| eventDurationMs  | 2500    | 1500–5000        |
-| eventsPerRound   | 20      | 10–50            |
-| gridSize         | 3       | 3–5              |
-| letterCount      | 8       | 4–8              |
+| Setting          | Default | Range            | Step   | Edited on |
+|------------------|---------|------------------|--------|-----------|
+| mode             | dual    | visual/audio/dual| –      | Home      |
+| n                | 2       | 1–5              | 1      | Settings  |
+| eventDurationMs  | 2500    | 1500–5000        | 500 ms | Settings  |
+| eventsPerRound   | 20      | 10–50            | 5      | Settings  |
+| gridSize         | 3       | 3–5              | 1      | Settings  |
+| letterCount      | 8       | 4–8              | 1      | Settings  |
+
+Ranges and steps live in the domain (`SETTING_RANGES`), not in the screen. Changes are saved immediately and apply from the next round.
 
 Letter set (phonetically distinct, the first `letterCount` are used): `C H K L Q R S T`.
 
@@ -80,9 +82,13 @@ Table `scores`:
 - Before the round, check `Speech.getAvailableVoicesAsync()`. If no voice is available, show a fallback message and offer visual-only play.
 
 ## Screens
-1. **Home**: high score, mode selector (visual/audio/dual), current settings summary, Start button, links to Settings and Score history.
+1. **Home** (all required):
+   - the current high score (see Score)
+   - mode selector: visual stimuli, auditory stimuli, or both (`visual` / `audio` / `dual`)
+   - the current settings: value of n, event duration, and number of events per round, in a "Game settings ›" card that opens Settings
+   - Start button, plus links to Settings and Score history
 2. **Game**: n×n grid (square in every orientation), HUD, quit button (no pause), match buttons ("Position" and/or "Sound" depending on mode), end-of-round summary with save-score form.
-3. **Settings**: edit and persist the settings above.
+3. **Settings** (all required): one row per setting (value of n, event duration, events per round, grid size, number of spoken letters), each with − / + buttons (at least 48×48) and the current value. A button is disabled at the end of its range. Event duration is shown in seconds, grid size as `3×3`.
 4. **Score history**: sortable list.
 
 ## Accessibility

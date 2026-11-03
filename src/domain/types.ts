@@ -1,3 +1,5 @@
+// MODEL (domain) · Types and constants: letters, match rate, default settings.
+
 /** A stimulus stream: which grid cell lights up, or which letter is spoken. */
 export type Modality = 'position' | 'audio';
 
@@ -53,4 +55,16 @@ export const DEFAULT_SETTINGS: Settings = {
   eventsPerRound: 20,
   gridSize: 3,
   letterCount: 8,
+};
+
+/** Every setting except mode is a number edited with − / + on the Settings screen. */
+export type NumericSetting = Exclude<keyof Settings, 'mode'>;
+
+/** Allowed range and step size for each numeric setting. */
+export const SETTING_RANGES: Record<NumericSetting, { min: number; max: number; step: number }> = {
+  n: { min: 1, max: 5, step: 1 },
+  eventDurationMs: { min: 1500, max: 5000, step: 500 },
+  eventsPerRound: { min: 10, max: 50, step: 5 },
+  gridSize: { min: 3, max: 5, step: 1 },
+  letterCount: { min: 4, max: LETTERS.length, step: 1 },
 };

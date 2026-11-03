@@ -12,6 +12,7 @@ Read SPEC.md and STYLE.md together with this file before writing any code.
 
 ## Allowed dependencies
 - `expo`, `expo-router`, `react-native-safe-area-context` (template defaults)
+- `expo-status-bar` (light status-bar text on the dark theme)
 - `expo-speech` (text-to-speech)
 - `expo-sqlite` (score history)
 - `@react-native-async-storage/async-storage` (settings)

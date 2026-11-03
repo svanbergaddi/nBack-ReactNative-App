@@ -1,6 +1,9 @@
+// VIEWMODEL · Game: round state, event timer, speech, commands.
+
 import * as Speech from 'expo-speech';
 import { useEffect, useState } from 'react';
 
+import { insertScore } from '../data/scoreDb';
 import {
   activeModalities,
   advanceEvent,
@@ -51,5 +54,6 @@ export function useGame(settings: Settings) {
     startRound: () => setState(startRound(settings, Math.random)),
     quitRound: () => setState(createIdleState(settings)),
     pressMatch: (modality: Modality) => setState((current) => registerPress(current, modality)),
+    saveScore: (name: string) => insertScore({ name, score: computeScore(state), n: settings.n, mode: settings.mode }),
   };
 }
